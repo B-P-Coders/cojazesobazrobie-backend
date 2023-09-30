@@ -1,0 +1,30 @@
+version: '4.19.0'
+
+services:
+  backend:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    networks:
+      cojazesobazrobie:
+  db:
+    image: postgres:latest
+    container_name: cojazesobazrobiedb
+    volumes: 
+      - ./data/db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    restart: unless-stopped
+    env_file:
+      - ./.env
+    networks:
+      cojazesobazrobie:
+
+networks:
+  cojazesobazrobie:

@@ -11,6 +11,9 @@ dependencies:
   '@nestjs/core':
     specifier: ^10.0.0
     version: 10.2.6(@nestjs/common@10.2.6)(@nestjs/platform-express@10.2.6)(reflect-metadata@0.1.13)(rxjs@7.8.1)
+  '@nestjs/mapped-types':
+    specifier: '*'
+    version: 2.0.2(@nestjs/common@10.2.6)(reflect-metadata@0.1.13)
   '@nestjs/platform-express':
     specifier: ^10.0.0
     version: 10.2.6(@nestjs/common@10.2.6)(@nestjs/core@10.2.6)
@@ -64,6 +67,9 @@ devDependencies:
   prettier:
     specifier: ^3.0.0
     version: 3.0.3
+  prisma:
+    specifier: ^5.3.1
+    version: 5.3.1
   source-map-support:
     specifier: ^0.5.21
     version: 0.5.21
@@ -946,6 +952,23 @@ packages:
     transitivePeerDependencies:
       - encoding
 
+  /@nestjs/mapped-types@2.0.2(@nestjs/common@10.2.6)(reflect-metadata@0.1.13):
+    resolution: {integrity: sha512-V0izw6tWs6fTp9+KiiPUbGHWALy563Frn8X6Bm87ANLRuE46iuBMD5acKBDP5lKL/75QFvrzSJT7HkCbB0jTpg==}
+    peerDependencies:
+      '@nestjs/common': ^8.0.0 || ^9.0.0 || ^10.0.0
+      class-transformer: ^0.4.0 || ^0.5.0
+      class-validator: ^0.13.0 || ^0.14.0
+      reflect-metadata: ^0.1.12
+    peerDependenciesMeta:
+      class-transformer:
+        optional: true
+      class-validator:
+        optional: true
+    dependencies:
+      '@nestjs/common': 10.2.6(reflect-metadata@0.1.13)(rxjs@7.8.1)
+      reflect-metadata: 0.1.13
+    dev: false
+
   /@nestjs/platform-express@10.2.6(@nestjs/common@10.2.6)(@nestjs/core@10.2.6):
     resolution: {integrity: sha512-4U16D5ot2570CR8Qm5qu/SBXsA2l5KxN7AVSGvzoWoBxjEoOnnZOapC5Pler3yYa0tT1xLhji61RX1gceKW3dw==}
     peerDependencies:
@@ -1038,6 +1061,11 @@ packages:
       open: 9.1.0
       picocolors: 1.0.0
       tslib: 2.6.2
+    dev: true
+
+  /@prisma/engines@5.3.1:
+    resolution: {integrity: sha512-6QkILNyfeeN67BNEPEtkgh3Xo2tm6D7V+UhrkBbRHqKw9CTaz/vvTP/ROwYSP/3JT2MtIutZm/EnhxUiuOPVDA==}
+    requiresBuild: true
     dev: true
 
   /@sinclair/typebox@0.27.8:
@@ -4224,6 +4252,15 @@ packages:
       '@jest/schemas': 29.6.3
       ansi-styles: 5.2.0
       react-is: 18.2.0
+    dev: true
+
+  /prisma@5.3.1:
+    resolution: {integrity: sha512-Wp2msQIlMPHe+5k5Od6xnsI/WNG7UJGgFUJgqv/ygc7kOECZapcSz/iU4NIEzISs3H1W9sFLjAPbg/gOqqtB7A==}
+    engines: {node: '>=16.13'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      '@prisma/engines': 5.3.1
     dev: true
 
   /process-nextick-args@2.0.1:
