@@ -18,6 +18,11 @@ export class SchoolsController {
     return await this.schoolsService.findAll(offset, limit);
   }
 
+  @Get('/name')
+  async findByName(@Query('offset') offset: number = 0, @Query('limit') limit: number = 25, @Query('name') name: string) {
+    return await this.schoolsService.findByName(offset, limit, name);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.schoolsService.findOne(+id);
