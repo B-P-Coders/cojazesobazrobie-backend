@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,4 +5,121 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model cooperators {
+  cooperator_id        String?   @db.VarChar(255)
+  cooperator_name      String?   @db.VarChar(255)
+  is_abroad_cooperator Boolean?
+  id                   Int?      @unique(map: "cooperators_unique_id") @default(autoincrement())
+  studies              studies[]
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model institutions {
+  institution String?   @db.VarChar(255)
+  id          Int?      @unique(map: "institutions_unique_id") @default(autoincrement())
+  studies     studies[]
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model isced {
+  isced_id   Int?
+  isced_name String?   @db.VarChar(255)
+  id         Int?      @unique(map: "isced_unique_id") @default(autoincrement())
+  studies    studies[]
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model languages {
+  language String?   @db.VarChar(255)
+  id       Int?      @unique(map: "languages_unique_id") @default(autoincrement())
+  studies  studies[]
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model run_names {
+  run_name String?   @db.VarChar(255)
+  id       Int?      @unique(map: "run_names_unique_id") @default(autoincrement())
+  studies  studies[]
+
+  @@ignore
+}
+
+model studies {
+  id                     Int            @id @default(autoincrement())
+  name_id                Int?
+  institution_id         Int?
+  level                  study_level?
+  profile                study_profile?
+  isced_id               Int?
+  create_date            DateTime?      @db.Date
+  is_for_teacher         Boolean?
+  language_list          String?        @db.VarChar(2000)
+  is_shared              Boolean?
+  status                 study_status?
+  expire_date            String?        @db.VarChar(255)
+  del_date               String?        @db.VarChar(255)
+  trades                 String?        @db.VarChar(2000)
+  cooperator_id          Int?
+  cooperation_start_date DateTime?      @db.Date
+  cooperation_end_date   DateTime?      @db.Date
+  run_name_id            Int?
+  run_form               String?        @db.VarChar(255)
+  lang_id                Int?
+  run_date               DateTime?      @db.Date
+  semester_count         Int?
+  ects_count             Int?
+  is_dual                Boolean?
+  run_status             study_status?
+  is_work_cooperation    Boolean?
+  run_title              title?
+  cooperators            cooperators?   @relation(fields: [cooperator_id], references: [id], onDelete: NoAction, onUpdate: NoAction) @ignore
+  institutions           institutions?  @relation(fields: [institution_id], references: [id], onDelete: NoAction, onUpdate: NoAction) @ignore
+  isced                  isced?         @relation(fields: [isced_id], references: [id], onDelete: NoAction, onUpdate: NoAction) @ignore
+  languages              languages?     @relation(fields: [lang_id], references: [id], onDelete: NoAction, onUpdate: NoAction) @ignore
+  study_names            study_names?   @relation(fields: [name_id], references: [id], onDelete: NoAction, onUpdate: NoAction) @ignore
+  run_names              run_names?     @relation(fields: [run_name_id], references: [id], onDelete: NoAction, onUpdate: NoAction) @ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model study_names {
+  name    String?   @db.VarChar(255)
+  id      Int?      @unique(map: "study_names_unique_id") @default(autoincrement())
+  studies studies[]
+
+  @@ignore
+}
+
+enum study_level {
+  jednolite_magisterskie @map("jednolite magisterskie")
+  drugiego_stopnia       @map("drugiego stopnia")
+  pierwszego_stopnia     @map("pierwszego stopnia")
+}
+
+enum study_profile {
+  praktyczny
+  og_lnoakademicki @map("ogólnoakademicki")
+}
+
+enum study_status {
+  wygaszane
+  zlikwidowane
+  prowadzone
+}
+
+enum title {
+  licencjat
+  in_ynier          @map("inżynier")
+  magister
+  magister_in_ynier @map("magister inżynier")
 }
