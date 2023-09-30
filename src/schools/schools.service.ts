@@ -13,9 +13,9 @@ export class SchoolsService {
   }
 
   async findAll(offset: number, limit: number) {
-    return await this.prisma.studies.findMany({
-      skip: offset,
-      take: limit,
+    const res = await this.prisma.studies.findMany({
+      skip: +offset,
+      take: +limit,
       include: {
         study_names: true,
         run_names: true,
@@ -25,6 +25,7 @@ export class SchoolsService {
         cooperators: true,
       },
     });
+    return res;
   }
 
   findOne(id: number) {
