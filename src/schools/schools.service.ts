@@ -22,8 +22,8 @@ export class SchoolsService {
         languages: true,
         isced: true,
         institutions: true,
-        cooperators: true
-      }
+        cooperators: true,
+      },
     });
   }
 
