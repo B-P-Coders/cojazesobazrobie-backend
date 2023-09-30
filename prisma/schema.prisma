@@ -64,7 +64,7 @@ model studies {
   cooperation_start_date DateTime?      @db.Date
   cooperation_end_date   DateTime?      @db.Date
   run_name_id            Int?
-  run_form               String?        @db.VarChar(255)
+  run_form               Boolean?
   lang_id                Int?
   run_date               DateTime?      @db.Date
   semester_count         Int?
