@@ -1,14 +1,14 @@
 version: '3.8'
 
 services:
-  backend:
-    build: .
-    ports:
-      - "3000:3000"
-    depends_on:
-      - db
-    networks:
-      cojazesobazrobie:
+  # backend:
+  #   build: .
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - db
+  #   networks:
+  #     cojazesobazrobie:
   db:
     image: postgres:latest
     container_name: cojazesobazrobiedb

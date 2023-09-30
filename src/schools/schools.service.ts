@@ -1,15 +1,30 @@
 import { Injectable } from '@nestjs/common';
 import { CreateSchoolDto } from './dto/create-school.dto';
 import { UpdateSchoolDto } from './dto/update-school.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { Prisma } from '@prisma/client';
+import { Study } from './entities/school.entity';
 
 @Injectable()
 export class SchoolsService {
+  constructor(private readonly prisma: PrismaService) { }
   create(createSchoolDto: CreateSchoolDto) {
     return 'This action adds a new school';
   }
 
-  findAll() {
-    return `This action returns all schools`;
+  async findAll(offset: number, limit: number) {
+    return await this.prisma.studies.findMany({
+      skip: offset,
+      take: limit,
+      include: {
+        study_names: true,
+        run_names: true,
+        languages: true,
+        isced: true,
+        institutions: true,
+        cooperators: true
+      }
+    });
   }
 
   findOne(id: number) {

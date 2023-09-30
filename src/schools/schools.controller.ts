@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe } from '@nestjs/common';
 import { SchoolsService } from './schools.service';
 import { CreateSchoolDto } from './dto/create-school.dto';
 import { UpdateSchoolDto } from './dto/update-school.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Controller('schools')
 export class SchoolsController {
@@ -9,12 +10,12 @@ export class SchoolsController {
 
   @Post()
   create(@Body() createSchoolDto: CreateSchoolDto) {
-    return this.schoolsService.create(createSchoolDto);
+    // return this.schoolsService.create(createSchoolDto);
   }
 
-  @Get()
-  findAll() {
-    return this.schoolsService.findAll();
+  @Get('/')
+  async findAll(@Query('offset') offset: number = 0, @Query('limit') limit: number = 25) {
+    return await this.schoolsService.findAll(offset, limit);
   }
 
   @Get(':id')
