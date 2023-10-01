@@ -29,11 +29,16 @@ export class SchoolsController {
     @Query('language') language: string, 
     @Query('institution') institution: string,
     @Query('run_title') run_title: string = null,
-    @Query('run_form') run_form: boolean = null,
+    @Query('run_form') run_form: string = null,
     @Query('run_status') run_status?: string | null,
-    @Query('is_for_teacher') is_for_teacher: boolean = null,
+    @Query('is_for_teacher') is_for_teacher: string = null,
   ) {
     return await this.schoolsService.findByName(offset, limit, name, language, institution, run_title, run_form , run_status, is_for_teacher);
+  }
+
+  @Get('/languages')
+  async getLanguages() {
+    return await this.schoolsService.getLanguages();
   }
 
   @Get(':id')

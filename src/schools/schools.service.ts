@@ -37,9 +37,9 @@ export class SchoolsService {
     language: string | null,
     institution: string | null,
     run_title: string | null,
-    run_form: boolean | null,
+    run_form: string | null,
     run_status: string | null,
-    is_for_teacher: boolean | null,
+    is_for_teacher: string | null,
   ) {
     console.log(institution)
     const res = await this.prisma.studies.findMany({
@@ -73,7 +73,7 @@ export class SchoolsService {
               },
             },
             run_form: {
-              equals: run_form || undefined,
+              equals: run_form == 'true' || undefined,
             },
             run_title: {
               equals: run_title || undefined,
@@ -81,15 +81,28 @@ export class SchoolsService {
             run_status: {
               equals: run_status || undefined,
             },
-            is_for_teacher: is_for_teacher || undefined,
+            is_for_teacher: is_for_teacher == 'true'  || undefined,
           },
         ],
       }
     })
-    // console.log(res)
     return res;
   }
 
+
+  async getLanguages() {
+    const res = await this.prisma.languages.findMany({
+      select: {
+        language: true,
+      }
+    })
+
+    const tab = res.map((item) => {
+      return item.language;
+    })
+
+    return tab;
+  }
 
   findOne(id: number) {
     return `This action returns a #${id} school`;
