@@ -1,21 +1,21 @@
-enum StudyLevel {
+export enum StudyLevel {
   jednolite_magisterskie = "jednolite magisterskie",
   drugiego_stopnia = "drugiego stopnia",
   pierwszego_stopnia = "pierwszego stopnia"
 }
   
-enum StudyProfile {
+export enum StudyProfile {
   praktyczny = "praktyczny",
   og_lnoakademicki = "ogólnoakademicki"
 }
   
-enum StudyStatus {
+export enum StudyStatus {
   wygaszane = "wygaszane",
   zlikwidowane = "zlikwidowane",
   prowadzone = "prowadzone"
 }
   
-enum Title {
+export enum Title {
   licencjat = "licencjat",
   in_ynier = "inżynier",
   magister = "magister",

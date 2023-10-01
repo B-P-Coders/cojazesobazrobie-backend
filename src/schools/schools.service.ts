@@ -5,6 +5,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 import { Cooperator, Institution, Isced, Language, Study } from './entities/school.entity';
 import { CityPipePipe } from 'src/city-pipe/city-pipe.pipe';
+import { StudyStatus, Title } from './entities/enums.entity';
 
 @Injectable()
 export class SchoolsService {
@@ -33,12 +34,12 @@ export class SchoolsService {
     offset: number,
     limit: number,
     name: string = null,
-    // level:  StudyLevel | null = null, 
-    // profile: StudyProfile | null = null, 
-    // isced: Isced | null = null, 
     language: string | null,
     institution: string | null,
-    cooperator: Cooperator | null = null
+    run_title: string | null,
+    run_form: boolean | null,
+    run_status: string | null,
+    is_for_teacher: boolean | null,
   ) {
     console.log(institution)
     const res = await this.prisma.studies.findMany({
@@ -71,6 +72,16 @@ export class SchoolsService {
                 mode: 'insensitive',
               },
             },
+            run_form: {
+              equals: run_form || undefined,
+            },
+            run_title: {
+              equals: run_title || undefined,
+            },
+            run_status: {
+              equals: run_status || undefined,
+            },
+            is_for_teacher: is_for_teacher || undefined,
           },
         ],
       }
