@@ -19,8 +19,9 @@ export class SchoolsController {
   }
 
   @Get('/name')
-  async findByName(@Query('offset') offset: number = 0, @Query('limit') limit: number = 25, @Query('name') name: string, @Query('language') language: string) {
-    return await this.schoolsService.findByName(offset, limit, name, language);
+  async findByName(@Query('offset') offset: number = 0, @Query('limit') limit: number = 25, @Query('name') name: string, @Query('language') language: string, @Query('insitution') institution: string) {
+    console.log(institution)
+    return await this.schoolsService.findByName(offset, limit, name, language, institution);
   }
 
   @Get(':id')

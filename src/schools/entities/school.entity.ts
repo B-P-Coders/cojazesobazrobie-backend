@@ -19,7 +19,7 @@ class Study {
   cooperation_start_date?: Date;
   cooperation_end_date?: Date;
   run_name_id?: number;
-  run_form?: string;
+  run_form?: boolean;
   lang_id?: number;
   run_date?: Date;
   semester_count?: number;

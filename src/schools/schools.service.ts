@@ -37,10 +37,10 @@ export class SchoolsService {
     // profile: StudyProfile | null = null, 
     // isced: Isced | null = null, 
     language: string | null,
-    institution: Institution | null = null,
+    institution: string | null,
     cooperator: Cooperator | null = null
   ) {
-    console.log(language)
+    console.log(institution)
     const res = await this.prisma.studies.findMany({
       skip: +offset,
       take: +limit,
@@ -48,29 +48,34 @@ export class SchoolsService {
         study_names: true,
         run_names: true,
         languages: true,
-        isced: true,
         institutions: true,
-        cooperators: true,
       },
       where: {
-        // AND: [
-        //   {
-        //     study_names: {
-        //       name: {
-        //         contains: name || undefined,
-        //         mode: 'insensitive',
-        //       },
-        //     },
+        AND: [
+          {
+            study_names: {
+              name: {
+                contains: name || undefined,
+                mode: 'insensitive',
+              },
+            },
             languages: {
               language: {
-                contains: language || undefined,
+                equals: language || undefined,
+                mode: 'insensitive',
+              },
+            },
+            institutions: {
+              institution: {
+                contains: institution || undefined,
                 mode: 'insensitive',
               },
             },
           },
-        // ],
-      })
-    console.log(res)
+        ],
+      }
+    })
+    // console.log(res)
     return res;
   }
 
