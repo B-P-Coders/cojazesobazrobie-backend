@@ -2,16 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { CreateSchoolDto } from './dto/create-school.dto';
 import { UpdateSchoolDto } from './dto/update-school.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { Prisma } from '@prisma/client';
-import {
-  Cooperator,
-  Institution,
-  Isced,
-  Language,
-  Study,
-} from './entities/school.entity';
-import { CityPipePipe } from 'src/city-pipe/city-pipe.pipe';
-import { StudyStatus, Title } from './entities/enums.entity';
+
+const SEARCH_LIMIT = 30;
 
 @Injectable()
 export class SchoolsService {
@@ -105,6 +97,25 @@ export class SchoolsService {
     const tab = res.map((item) => {
       return item.language;
     });
+
+    return tab;
+  }
+
+  async searchDisciplines(search: string) {
+    const res = await this.prisma.study_names.findMany({
+      take: SEARCH_LIMIT,
+      select: {
+        name: true,
+      },
+      where: {
+        name: {
+          contains: search,
+          mode: 'insensitive',
+        },
+      },
+    });
+
+    const tab = res.map((item) => item.name);
 
     return tab;
   }

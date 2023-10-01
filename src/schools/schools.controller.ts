@@ -29,6 +29,11 @@ export class SchoolsController {
     return await this.schoolsService.findAll(offset, limit);
   }
 
+  @Get('/disciplines')
+  languages(@Query('search') search: string) {
+    return this.schoolsService.searchDisciplines(search);
+  }
+
   @Get('/search')
   async search(
     @Query('offset') offset: number = 0,
