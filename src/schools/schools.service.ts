@@ -30,16 +30,17 @@ export class SchoolsService {
   }
 
   async findByName(
-    offset: number, 
-    limit: number, 
-    name: string = null, 
+    offset: number,
+    limit: number,
+    name: string = null,
     // level:  StudyLevel | null = null, 
     // profile: StudyProfile | null = null, 
     // isced: Isced | null = null, 
-    language: Language | null = null, 
-    institution: Institution | null = null, 
+    language: string | null,
+    institution: Institution | null = null,
     cooperator: Cooperator | null = null
-    ) {
+  ) {
+    console.log(language)
     const res = await this.prisma.studies.findMany({
       skip: +offset,
       take: +limit,
@@ -52,34 +53,37 @@ export class SchoolsService {
         cooperators: true,
       },
       where: {
-        study_names: {
-            name: {
-              contains: name || undefined,
-            mode: 'insensitive',
+        // AND: [
+        //   {
+        //     study_names: {
+        //       name: {
+        //         contains: name || undefined,
+        //         mode: 'insensitive',
+        //       },
+        //     },
+            languages: {
+              language: {
+                contains: language || undefined,
+                mode: 'insensitive',
+              },
+            },
           },
-        },
-        languages: {
-          language: {
-            contains: language || undefined,
-            mode: 'insensitive',
-          },
-        },
-    },
-  });
-  console.log(language)
+        // ],
+      })
+    console.log(res)
     return res;
   }
 
 
-findOne(id: number) {
-  return `This action returns a #${id} school`;
-}
+  findOne(id: number) {
+    return `This action returns a #${id} school`;
+  }
 
-update(id: number, updateSchoolDto: UpdateSchoolDto) {
-  return `This action updates a #${id} school`;
-}
+  update(id: number, updateSchoolDto: UpdateSchoolDto) {
+    return `This action updates a #${id} school`;
+  }
 
-remove(id: number) {
-  return `This action removes a #${id} school`;
-}
+  remove(id: number) {
+    return `This action removes a #${id} school`;
+  }
 }
