@@ -38,6 +38,8 @@ To see this projekt documentation just run it and go to `/api` endpoint
 
 This project integrated with [cojazesobazrobie-frontend](https://github.com/B-P-Coders/cojazesobazrobie-frontend)
 
+[Here](https://github.com/B-P-Coders/cojazesobazrobie-internals) you can find internals that can help you building the database
+
 ---
 
 This project was made for [HackYeah](https://hackyeah.pl/) hackaton
