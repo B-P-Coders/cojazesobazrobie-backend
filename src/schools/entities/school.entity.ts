@@ -1,4 +1,4 @@
-import { StudyLevel, StudyProfile, StudyStatus, Title } from "./enums.entity";
+import { StudyLevel, StudyProfile, StudyStatus, Title } from './enums.entity';
 
 export { Study, StudyName, RunName, Language, Isced, Institution, Cooperator };
 

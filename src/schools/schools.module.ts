@@ -7,6 +7,6 @@ import { APP_PIPE } from '@nestjs/core';
 
 @Module({
   controllers: [SchoolsController],
-  providers: [SchoolsService, PrismaService,]
+  providers: [SchoolsService, PrismaService],
 })
-export class SchoolsModule { }
+export class SchoolsModule {}
