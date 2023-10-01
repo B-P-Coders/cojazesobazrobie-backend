@@ -4,7 +4,6 @@ import { UpdateSchoolDto } from './dto/update-school.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 import { Cooperator, Institution, Isced, Language, Study } from './entities/school.entity';
-import { CityPipePipe } from 'src/city-pipe/city-pipe.pipe';
 
 @Injectable()
 export class SchoolsService {
@@ -29,17 +28,7 @@ export class SchoolsService {
     return res;
   }
 
-  async findByName(
-    offset: number, 
-    limit: number, 
-    name: string = null, 
-    // level:  StudyLevel | null = null, 
-    // profile: StudyProfile | null = null, 
-    // isced: Isced | null = null, 
-    language: Language | null = null, 
-    institution: Institution | null = null, 
-    cooperator: Cooperator | null = null
-    ) {
+  async findByName(offset: number, limit: number, name: string = null, level:  StudyLevel | null = null, profile: StudyProfile | null = null, isced: Isced | null = null, language: Language | null = null, institution: Institution | null = null, cooperator: Cooperator | null = null) {
     const res = await this.prisma.studies.findMany({
       skip: +offset,
       take: +limit,
@@ -54,19 +43,15 @@ export class SchoolsService {
       where: {
         study_names: {
             name: {
-              contains: name || undefined,
+              contains: name,
             mode: 'insensitive',
           },
         },
-        languages: {
-          language: {
-            contains: language || undefined,
-            mode: 'insensitive',
-          },
-        },
+        level: {
+          
+      },
     },
   });
-  console.log(language)
     return res;
   }
 
